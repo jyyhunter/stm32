@@ -1,0 +1,35 @@
+# ===== Keil MDK (uVision) 编译输出目录 =====
+Objects/
+Listings/
+
+# ===== Keil 编译中间文件与目标固件 =====
+*.o
+*.obj
+*.crf
+*.d
+*.dep
+*.iex
+*.lnp
+*.axf
+*.hex
+*.bin
+*.map
+*.lst
+*.build_log.htm
+build_log.txt
+test_build.txt
+*_build.txt
+*.bak
+
+# ===== uVision 本地窗口/布局状态（按用户名保存，不共享） =====
+*.uvguix.*
+
+# ===== STM32CubeMX / CMake 构建目录 =====
+build/
+Debug/
+Release/
+
+# ===== 编辑器 / 系统杂项 =====
+Thumbs.db
+desktop.ini
+.DS_Store
