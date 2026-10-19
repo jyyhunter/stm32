@@ -1,0 +1,11 @@
+{
+  "name": "StdPeriph_Driver",
+  "version": "3.5.0",
+  "description": "STM32F10x Standard Peripheral Library V3.5.0 (headers and sources in src)",
+  "build": {
+    "srcDir": "src",
+    "srcFilter": [
+      "+<*>"
+    ]
+  }
+}
