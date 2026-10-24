@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="730" viewBox="0 0 1040 730" font-family="Microsoft YaHei, SimHei, sans-serif">
+  <rect width="1040" height="730" fill="#ffffff"/>
+
+  <text x="520" y="36" font-size="24" font-weight="bold" text-anchor="middle" fill="#1a1a1a">
+    AS5600 速度测量 + I2C OLED — STM32F103VET6 接线示意图
+  </text>
+
+  <defs>
+    <marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="3" orient="auto">
+      <path d="M0,6 L4,0 L8,6" fill="none" stroke="#000" stroke-width="1"/>
+    </marker>
+    <marker id="arrowDown" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,0 L4,6" fill="none" stroke="#000" stroke-width="1"/>
+    </marker>
+  </defs>
+
+  <!-- 磁铁安装侧视图 -->
+  <text x="200" y="78" font-size="15" font-weight="bold" text-anchor="middle" fill="#333">磁铁安装（侧视）</text>
+  <rect x="190" y="90" width="20" height="14" fill="#999" stroke="#555"/>
+  <text x="216" y="102" font-size="12" fill="#555">转轴（带动磁铁旋转）</text>
+  <circle cx="170" cy="123" r="20" fill="#ff5959" stroke="#8a0000" stroke-width="1.5"/>
+  <line x1="170" y1="103" x2="170" y2="143" stroke="#8a0000" stroke-width="1.5"/>
+  <text x="160" y="129" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">N</text>
+  <text x="180" y="129" font-size="14" font-weight="bold" text-anchor="middle" fill="#ffffff">S</text>
+  <line x1="170" y1="143" x2="170" y2="166" stroke="#000" stroke-width="1" marker-start="url(#arrowUp)" marker-end="url(#arrowDown)"/>
+  <text x="226" y="158" font-size="12" fill="#000">间距 1~3 mm</text>
+  <rect x="148" y="166" width="44" height="16" fill="#222" stroke="#000"/>
+  <text x="202" y="178" font-size="11" fill="#333">AS5600</text>
+  <rect x="90" y="182" width="160" height="14" rx="2" fill="#3f8f46" stroke="#2a6b2f"/>
+  <text x="170" y="208" font-size="12" text-anchor="middle" fill="#2a6b2f">编码器 PCB（芯片固定不转）</text>
+  <text x="330" y="110" font-size="12" fill="#444">· 径向充磁圆形磁铁（Ø6mm），不可用轴向充磁</text>
+  <text x="330" y="132" font-size="12" fill="#444">· 圆心对准芯片中心，置于正上方</text>
+  <text x="330" y="154" font-size="12" fill="#444">· AS5600 与 OLED 各用一条独立软件 I2C 总线</text>
+  <text x="330" y="176" font-size="12" fill="#444">· 所有 VCC 接 3.3V，SCL/SDA 模块自带上拉</text>
+
+  <!-- 模块框 -->
+  <rect x="30" y="225" width="210" height="190" rx="8" fill="#f3f8ff" stroke="#2c5f9e" stroke-width="2"/>
+  <text x="135" y="252" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c5f9e">AS5600 编码器 (0x36)</text>
+
+  <rect x="30" y="445" width="210" height="190" rx="8" fill="#fdf2ff" stroke="#7a2f9e" stroke-width="2"/>
+  <text x="135" y="472" font-size="14" font-weight="bold" text-anchor="middle" fill="#7a2f9e">0.96寸 OLED SSD1306 (0x78)</text>
+
+  <rect x="430" y="215" width="290" height="435" rx="8" fill="#f5fff4" stroke="#2f7a37" stroke-width="2"/>
+  <text x="575" y="243" font-size="17" font-weight="bold" text-anchor="middle" fill="#2f7a37">STM32F103VET6 开发板</text>
+
+  <rect x="800" y="255" width="200" height="200" rx="8" fill="#fff8f0" stroke="#b5691f" stroke-width="2"/>
+  <text x="900" y="282" font-size="16" font-weight="bold" text-anchor="middle" fill="#b5691f">USB 转 TTL</text>
+
+  <!-- AS5600 引脚 -->
+  <g font-size="14" fill="#1a1a1a">
+    <text x="52" y="283">VCC</text><text x="52" y="323">GND</text>
+    <text x="52" y="363">SCL</text><text x="52" y="403">SDA</text>
+  </g>
+  <g stroke="#2c5f9e" stroke-width="1.5">
+    <line x1="120" y1="278" x2="240" y2="278"/>
+    <line x1="120" y1="318" x2="240" y2="318"/>
+    <line x1="120" y1="358" x2="240" y2="358"/>
+    <line x1="120" y1="398" x2="240" y2="398"/>
+  </g>
+
+  <!-- OLED 引脚 -->
+  <g font-size="14" fill="#1a1a1a">
+    <text x="52" y="503">VCC</text><text x="52" y="543">GND</text>
+    <text x="52" y="583">SCL</text><text x="52" y="623">SDA</text>
+  </g>
+  <g stroke="#7a2f9e" stroke-width="1.5">
+    <line x1="120" y1="498" x2="240" y2="498"/>
+    <line x1="120" y1="538" x2="240" y2="538"/>
+    <line x1="120" y1="578" x2="240" y2="578"/>
+    <line x1="120" y1="618" x2="240" y2="618"/>
+  </g>
+
+  <!-- STM32 左侧引脚 -->
+  <g font-size="14" fill="#1a1a1a">
+    <text x="468" y="283">3.3V</text>
+    <text x="468" y="323">GND</text>
+    <text x="468" y="363">PB6 (SCL)</text>
+    <text x="468" y="403">PB7 (SDA)</text>
+    <text x="468" y="503">3.3V</text>
+    <text x="468" y="543">GND</text>
+    <text x="468" y="583">PB8 (OLED SCL)</text>
+    <text x="468" y="623">PB9 (OLED SDA)</text>
+  </g>
+  <g stroke="#2f7a37" stroke-width="1.5">
+    <line x1="430" y1="278" x2="468" y2="278"/>
+    <line x1="430" y1="318" x2="468" y2="318"/>
+    <line x1="430" y1="358" x2="468" y2="358"/>
+    <line x1="430" y1="398" x2="468" y2="398"/>
+    <line x1="430" y1="498" x2="468" y2="498"/>
+    <line x1="430" y1="538" x2="468" y2="538"/>
+    <line x1="430" y1="578" x2="468" y2="578"/>
+    <line x1="430" y1="618" x2="468" y2="618"/>
+  </g>
+
+  <!-- STM32 右侧引脚（USART3） -->
+  <g font-size="14" fill="#1a1a1a" text-anchor="end">
+    <text x="682" y="285">PB10 (USART3_TX)</text>
+    <text x="682" y="325">PB11 (USART3_RX)</text>
+    <text x="682" y="365">GND</text>
+    <text x="682" y="405">3.3V</text>
+  </g>
+  <g stroke="#2f7a37" stroke-width="1.5">
+    <line x1="682" y1="280" x2="720" y2="280"/>
+    <line x1="682" y1="320" x2="720" y2="320"/>
+    <line x1="682" y1="360" x2="720" y2="360"/>
+    <line x1="682" y1="400" x2="720" y2="400"/>
+  </g>
+
+  <!-- USB 转 TTL 引脚 -->
+  <g font-size="14" fill="#1a1a1a" text-anchor="end">
+    <text x="950" y="285">RXD</text>
+    <text x="950" y="325">TXD</text>
+    <text x="950" y="365">GND</text>
+    <text x="950" y="405">3.3V</text>
+  </g>
+  <g stroke="#b5691f" stroke-width="1.5">
+    <line x1="865" y1="280" x2="800" y2="280"/>
+    <line x1="865" y1="320" x2="800" y2="320"/>
+    <line x1="865" y1="360" x2="800" y2="360"/>
+    <line x1="865" y1="400" x2="800" y2="400"/>
+  </g>
+
+  <!-- AS5600 -> STM32 -->
+  <line x1="240" y1="278" x2="430" y2="278" stroke="#d62728" stroke-width="3"/>
+  <line x1="240" y1="318" x2="430" y2="318" stroke="#222222" stroke-width="3"/>
+  <line x1="240" y1="358" x2="430" y2="358" stroke="#1f77b4" stroke-width="3"/>
+  <line x1="240" y1="398" x2="430" y2="398" stroke="#2ca02c" stroke-width="3"/>
+  <g fill="#d62728"><circle cx="240" cy="278" r="3.5"/><circle cx="430" cy="278" r="3.5"/></g>
+  <g fill="#222222"><circle cx="240" cy="318" r="3.5"/><circle cx="430" cy="318" r="3.5"/></g>
+  <g fill="#1f77b4"><circle cx="240" cy="358" r="3.5"/><circle cx="430" cy="358" r="3.5"/></g>
+  <g fill="#2ca02c"><circle cx="240" cy="398" r="3.5"/><circle cx="430" cy="398" r="3.5"/></g>
+
+  <!-- OLED -> STM32 -->
+  <line x1="240" y1="498" x2="430" y2="498" stroke="#d62728" stroke-width="3"/>
+  <line x1="240" y1="538" x2="430" y2="538" stroke="#222222" stroke-width="3"/>
+  <line x1="240" y1="578" x2="430" y2="578" stroke="#1f77b4" stroke-width="3"/>
+  <line x1="240" y1="618" x2="430" y2="618" stroke="#2ca02c" stroke-width="3"/>
+  <g fill="#d62728"><circle cx="240" cy="498" r="3.5"/><circle cx="430" cy="498" r="3.5"/></g>
+  <g fill="#222222"><circle cx="240" cy="538" r="3.5"/><circle cx="430" cy="538" r="3.5"/></g>
+  <g fill="#1f77b4"><circle cx="240" cy="578" r="3.5"/><circle cx="430" cy="578" r="3.5"/></g>
+  <g fill="#2ca02c"><circle cx="240" cy="618" r="3.5"/><circle cx="430" cy="618" r="3.5"/></g>
+
+  <!-- STM32 -> USB -->
+  <line x1="720" y1="280" x2="800" y2="280" stroke="#ff7f0e" stroke-width="3"/>
+  <line x1="720" y1="320" x2="800" y2="320" stroke="#ff7f0e" stroke-width="2" stroke-dasharray="6,4"/>
+  <line x1="720" y1="360" x2="800" y2="360" stroke="#222222" stroke-width="3"/>
+  <line x1="720" y1="400" x2="800" y2="400" stroke="#888888" stroke-width="2" stroke-dasharray="5,4"/>
+  <g fill="#ff7f0e"><circle cx="720" cy="280" r="3.5"/><circle cx="800" cy="280" r="3.5"/><circle cx="720" cy="320" r="3.5"/><circle cx="800" cy="320" r="3.5"/></g>
+  <g fill="#222222"><circle cx="720" cy="360" r="3.5"/><circle cx="800" cy="360" r="3.5"/></g>
+  <text x="760" y="424" font-size="11" text-anchor="middle" fill="#888">3.3V 不接，仅共地</text>
+
+  <!-- 连线标签 -->
+  <g font-size="12" font-weight="bold">
+    <text x="335" y="271" text-anchor="middle" fill="#d62728">VCC 3.3V</text>
+    <text x="335" y="311" text-anchor="middle" fill="#222222">GND</text>
+    <text x="335" y="351" text-anchor="middle" fill="#1f77b4">SCL</text>
+    <text x="335" y="391" text-anchor="middle" fill="#2ca02c">SDA</text>
+    <text x="335" y="491" text-anchor="middle" fill="#d62728">VCC 3.3V</text>
+    <text x="335" y="531" text-anchor="middle" fill="#222222">GND</text>
+    <text x="335" y="571" text-anchor="middle" fill="#1f77b4">SCL</text>
+    <text x="335" y="611" text-anchor="middle" fill="#2ca02c">SDA</text>
+    <text x="760" y="262" text-anchor="middle" font-size="11" fill="#ff7f0e">TX→RX</text>
+    <text x="760" y="335" text-anchor="middle" font-size="11" fill="#ff7f0e">RX←TX 可选</text>
+  </g>
+
+  <text x="335" y="442" font-size="11" text-anchor="middle" fill="#2c5f9e">I2C 总线 1（编码器）</text>
+  <text x="335" y="665" font-size="11" text-anchor="middle" fill="#7a2f9e">I2C 总线 2（OLED）</text>
+
+  <!-- 图例 -->
+  <g font-size="13" fill="#333">
+    <line x1="40" y1="690" x2="80" y2="690" stroke="#d62728" stroke-width="3"/><text x="88" y="695">电源</text>
+    <line x1="140" y1="690" x2="180" y2="690" stroke="#222222" stroke-width="3"/><text x="188" y="695">地</text>
+    <line x1="225" y1="690" x2="265" y2="690" stroke="#1f77b4" stroke-width="3"/><text x="273" y="695">SCL</text>
+    <line x1="325" y1="690" x2="365" y2="690" stroke="#2ca02c" stroke-width="3"/><text x="373" y="695">SDA</text>
+    <line x1="425" y1="690" x2="465" y2="690" stroke="#ff7f0e" stroke-width="3"/><text x="473" y="695">串口</text>
+    <line x1="530" y1="690" x2="570" y2="690" stroke="#888" stroke-width="2" stroke-dasharray="5,4"/><text x="578" y="695">不接/可选</text>
+  </g>
+
+  <text x="520" y="722" font-size="13" text-anchor="middle" fill="#666">
+    AS5600：PB6/PB7（0x36）　|　OLED：PB8/PB9（0x78）　|　串口 USART3 PB10/PB11 115200,8N1　|　VCC 全部接 3.3V
+  </text>
+</svg>

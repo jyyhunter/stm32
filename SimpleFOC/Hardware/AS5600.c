@@ -111,7 +111,7 @@ void AS5600_Init(void)
 
     /* SCL 推挽输出 */
     GPIO_InitStructure.GPIO_Pin = SCL_PIN;
-    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
+    GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP; // 推挽输出
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(SCL_PORT, &GPIO_InitStructure);
 

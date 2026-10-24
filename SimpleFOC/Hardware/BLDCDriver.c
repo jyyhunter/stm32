@@ -36,14 +36,14 @@ void Driver_Init(BLDCDriver *driver, float Vpower)
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-    /* PB13/PB14/PB15 推挽输出（三相使能） */
-    GPIO_InitStructure.GPIO_Pin = DRIVER_EN_ALL_PINS;
+    /* PB15 推挽输出（驱动板总使能 EN，高有效） */
+    GPIO_InitStructure.GPIO_Pin = DRIVER_EN_PIN;
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(DRIVER_EN_PORT, &GPIO_InitStructure);
 
-    /* 初始使能脚拉低 */
-    GPIO_ResetBits(DRIVER_EN_PORT, DRIVER_EN_ALL_PINS);
+    /* 初始使能脚拉低（失能） */
+    GPIO_ResetBits(DRIVER_EN_PORT, DRIVER_EN_PIN);
 
     /* TIM1 时基：向上计数，72MHz，20kHz */
     TIM_TimeBaseStructure.TIM_Period = DRIVER_PWM_PERIOD - 1;
@@ -75,14 +75,14 @@ void Driver_Init(BLDCDriver *driver, float Vpower)
 
 void Driver_Enable(BLDCDriver *driver)
 {
-    GPIO_SetBits(DRIVER_EN_PORT, DRIVER_EN_ALL_PINS);
+    GPIO_SetBits(DRIVER_EN_PORT, DRIVER_EN_PIN);
     Driver_SetPwm(driver, 0.0f, 0.0f, 0.0f);
 }
 
 void Driver_Disable(BLDCDriver *driver)
 {
     Driver_SetPwm(driver, 0.0f, 0.0f, 0.0f);
-    GPIO_ResetBits(DRIVER_EN_PORT, DRIVER_EN_ALL_PINS);
+    GPIO_ResetBits(DRIVER_EN_PORT, DRIVER_EN_PIN);
 }
 
 void Driver_SetPwm(BLDCDriver *driver, float Ua, float Ub, float Uc)
