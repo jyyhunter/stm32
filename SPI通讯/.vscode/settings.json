@@ -1,0 +1,11 @@
+{
+  "platformio-ide.useBuiltinPIOCore": false,
+  "platformio-ide.useBuiltinPython": false,
+  "platformio-ide.customPATH": "D:\\program\\python;D:\\program\\python\\Scripts",
+  "terminal.integrated.windowsUseConptyDll": true,
+  "files.associations": {
+    "*.s": "asm",
+    "*.c": "c",
+    "*.h": "c"
+  }
+}
