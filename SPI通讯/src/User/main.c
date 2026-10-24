@@ -3,6 +3,7 @@
 #include "Serial.h"
 #include "stm32f10x_usart.h"
 #include "MYSPI.h"
+#include "GPIO_TEST.h"
 /*
  * 硬件连接：
  *   ATK-MS901M 模块：TX->PB11(USART3_RX)  RX->PB10(USART3_TX)  VCC/GND
@@ -15,11 +16,13 @@ int main(void)
 
     Serial_Init(); // 初始化串口1（上位机）和串口3（MS901）
     Serial_Printf("MS901M Test\r\n");
-
+    GPIO_InitT(); // 初始化 GPIOB 引脚
     while (1)
     {
 
-        
+        GPIO_WriteBit(GPIOB, GPIO_Pin_7, 1); // 设置 PB7 高电平
+        Delay_ms(1000);
+        GPIO_WriteBit(GPIOB, GPIO_Pin_7, 0); // 设置 PB7 低电平
         Serial_SendString("Hello, MS901M!\r\n");
         Delay_ms(1000);
     }
