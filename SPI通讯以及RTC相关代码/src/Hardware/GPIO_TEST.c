@@ -11,8 +11,5 @@ void GPIO_InitT()
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IPU;  // 上拉输入具备驱动能力
     GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
     GPIO_Init(GPIOB, &GPIO_InitStructure);
-
-    
-
     //GPIO_WriteBit(GPIOB, GPIO_Pin_7, 0); // 设置默认电平为高
 }

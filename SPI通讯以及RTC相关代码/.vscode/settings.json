@@ -3,6 +3,7 @@
   "platformio-ide.useBuiltinPython": false,
   "platformio-ide.customPATH": "D:\\program\\python;D:\\program\\python\\Scripts",
   "terminal.integrated.windowsUseConptyDll": true,
+  "C_Cpp.intelliSenseEngine": "Default",
   "files.associations": {
     "*.s": "asm",
     "*.c": "c",
