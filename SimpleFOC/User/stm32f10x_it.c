@@ -35,6 +35,14 @@
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
+/* 故障时直接操作寄存器，立即关闭 TIM1 主输出和驱动使能 */
+static void Fault_StopMotor(void)
+{
+    TIM1->BDTR &= ~((uint16_t)TIM_BDTR_MOE);
+    TIM1->CR1 &= ~((uint16_t)TIM_CR1_CEN);
+    GPIOB->BSRR = ((uint32_t)GPIO_Pin_15) << 16;
+}
+
 /******************************************************************************/
 /*            Cortex-M3 Processor Exceptions Handlers                         */
 /******************************************************************************/
@@ -46,6 +54,10 @@
   */
 void NMI_Handler(void)
 {
+  Fault_StopMotor();
+  while (1)
+  {
+  }
 }
 
 /**
@@ -55,7 +67,7 @@ void NMI_Handler(void)
   */
 void HardFault_Handler(void)
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
+  Fault_StopMotor();
   while (1)
   {
   }
@@ -68,7 +80,7 @@ void HardFault_Handler(void)
   */
 void MemManage_Handler(void)
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
+  Fault_StopMotor();
   while (1)
   {
   }
@@ -81,7 +93,7 @@ void MemManage_Handler(void)
   */
 void BusFault_Handler(void)
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
+  Fault_StopMotor();
   while (1)
   {
   }
@@ -94,7 +106,7 @@ void BusFault_Handler(void)
   */
 void UsageFault_Handler(void)
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
+  Fault_StopMotor();
   while (1)
   {
   }

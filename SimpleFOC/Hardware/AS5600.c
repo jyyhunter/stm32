@@ -121,12 +121,19 @@ void AS5600_Init(void)
 
 uint16_t AS5600_GetRawAngle(void)
 {
-    uint8_t high, low;
+    uint8_t high, low, nack = 0;
+
     I2C_Start();
-    I2C_SendByte(AS5600_ADDR_WRITE);
-    I2C_SendByte(AS5600_RAW_ANGLE_H);
+    nack |= I2C_SendByte(AS5600_ADDR_WRITE);
+    nack |= I2C_SendByte(AS5600_RAW_ANGLE_H);
     I2C_Start();
-    I2C_SendByte(AS5600_ADDR_READ);
+    nack |= I2C_SendByte(AS5600_ADDR_READ);
+    if (nack)
+    {
+        I2C_Stop();
+        return 0xFFFF;
+    }
+
     high = I2C_ReadByte(0);   /* ACK */
     low  = I2C_ReadByte(1);   /* NACK */
     I2C_Stop();
@@ -135,17 +142,27 @@ uint16_t AS5600_GetRawAngle(void)
 
 float AS5600_GetMechAngle(void)
 {
-    return (float)AS5600_GetRawAngle() * 6.28318530718f / 4096.0f;
+    uint16_t raw = AS5600_GetRawAngle();
+    if (raw > 0x0FFF)
+        return -1.0f;
+    return (float)raw * 6.28318530718f / 4096.0f;
 }
 
 uint8_t AS5600_ReadReg(uint8_t reg)
 {
-    uint8_t val;
+    uint8_t val, nack = 0;
+
     I2C_Start();
-    I2C_SendByte(AS5600_ADDR_WRITE);
-    I2C_SendByte(reg);
+    nack |= I2C_SendByte(AS5600_ADDR_WRITE);
+    nack |= I2C_SendByte(reg);
     I2C_Start();
-    I2C_SendByte(AS5600_ADDR_READ);
+    nack |= I2C_SendByte(AS5600_ADDR_READ);
+    if (nack)
+    {
+        I2C_Stop();
+        return 0xFF;
+    }
+
     val = I2C_ReadByte(1);   /* NACK */
     I2C_Stop();
     return val;

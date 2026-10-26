@@ -75,14 +75,16 @@ void Driver_Init(BLDCDriver *driver, float Vpower)
 
 void Driver_Enable(BLDCDriver *driver)
 {
+    TIM_CtrlPWMOutputs(TIM1, ENABLE);
     GPIO_SetBits(DRIVER_EN_PORT, DRIVER_EN_PIN);
     Driver_SetPwm(driver, 0.0f, 0.0f, 0.0f);
 }
 
 void Driver_Disable(BLDCDriver *driver)
 {
-    Driver_SetPwm(driver, 0.0f, 0.0f, 0.0f);
     GPIO_ResetBits(DRIVER_EN_PORT, DRIVER_EN_PIN);
+    TIM_CtrlPWMOutputs(TIM1, DISABLE);
+    Driver_SetPwm(driver, 0.0f, 0.0f, 0.0f);
 }
 
 void Driver_SetPwm(BLDCDriver *driver, float Ua, float Ub, float Uc)

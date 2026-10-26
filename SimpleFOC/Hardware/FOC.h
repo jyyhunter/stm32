@@ -48,6 +48,10 @@ typedef struct {
     uint8_t aligned;
 } FOCMotor;
 
+extern volatile float g_align_start_angle;
+extern volatile float g_align_end_angle;
+extern volatile float g_align_delta;
+
 /* 初始化电机：pp=极对数，Vpower=电源电压 */
 void FOC_Init(FOCMotor *m, uint8_t pp, float Vpower);
 
