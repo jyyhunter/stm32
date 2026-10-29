@@ -18,12 +18,12 @@ void AD_Init()
 	
 	// 用结构体配置ADC转换器
 	ADC_InitTypeDef ADC_InitDef;
-	ADC_InitDef.ADC_Mode= ADC_Mode_Independent;
-	ADC_InitDef.ADC_DataAlign = ADC_DataAlign_Right;
-	ADC_InitDef.ADC_ContinuousConvMode = DISABLE;
-	ADC_InitDef.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None;
-	ADC_InitDef.ADC_NbrOfChannel = 1;
-	ADC_InitDef.ADC_ScanConvMode = DISABLE;
+	ADC_InitDef.ADC_Mode= ADC_Mode_Independent; // 独立模式
+	ADC_InitDef.ADC_DataAlign = ADC_DataAlign_Right; // 数据右对齐
+	ADC_InitDef.ADC_ContinuousConvMode = DISABLE; // 单次转换模式s
+	ADC_InitDef.ADC_ExternalTrigConv = ADC_ExternalTrigConv_None; // 软件触发
+	ADC_InitDef.ADC_NbrOfChannel = 1; // 通道数量
+	ADC_InitDef.ADC_ScanConvMode = DISABLE; // 扫描模式关闭
 	ADC_Init(ADC1,&ADC_InitDef);
 	
 	// 配置中断，模拟看门狗，本次省略
@@ -31,7 +31,7 @@ void AD_Init()
 	
 	
 	// 启用
-	ADC_Cmd(ADC1,ENABLE);
+	ADC_Cmd(ADC1,ENABLE); // 使能ADC1
 	// 校准ADC
 	ADC_ResetCalibration(ADC1);
 	while(ADC_GetResetCalibrationStatus(ADC1)== SET);
