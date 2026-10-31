@@ -6,6 +6,8 @@
 #include "AS5600.h"
 #include "PID.h"
 
+#define FOC_SPEED_HISTORY 32U
+
 /* 控制模式 */
 typedef enum {
     MOTOR_MODE_ANGLE = 0,    /* 角度闭环（位置） */
@@ -17,6 +19,7 @@ typedef struct {
     uint8_t pole_pairs;            /* 极对数 */
     float zero_electric_angle;     /* 传感器零位电角度 */
     float sensor_direction;        /* 传感器方向，对齐时自动检测：1 或 -1 */
+    float torque_sign;             /* 转矩方向修正：1 或 -1 */
 
     /* ---- 驱动 ---- */
     BLDCDriver *driver;
@@ -41,8 +44,16 @@ typedef struct {
 
     /* ---- 传感器内部 ---- */
     float mech_prev;
+    float mech_angle;
     float vel_prev;
     float lpf_time;                /* 速度低通时间常数(s) */
+    float speed_window;            /* 速度窗口采样周期(s) */
+    float speed_history_delta[FOC_SPEED_HISTORY];
+    float speed_history_time[FOC_SPEED_HISTORY];
+    float speed_delta_sum;
+    float speed_time_sum;
+    uint8_t speed_index;
+    uint8_t speed_count;
 
     FOCMode mode;
     uint8_t aligned;
@@ -60,6 +71,9 @@ uint8_t FOC_Align(FOCMotor *m);
 
 /* 每个控制周期调用，Ts=周期(s)，完成角度/速度闭环 */
 void FOC_Loop(FOCMotor *m, float Ts);
+
+/* 仅更新传感器与多圈位置，不计算或输出转矩 */
+uint8_t FOC_UpdateSensor(FOCMotor *m, float Ts);
 
 /* 直接给定电角度施加电压（对齐/开环用） */
 void FOC_SetPhaseVoltage(FOCMotor *m, float Uq, float Ud, float angle_el);

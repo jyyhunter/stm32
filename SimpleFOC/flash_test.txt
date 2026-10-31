@@ -1,3 +1,0 @@
-Load "D:\\stm32code\\SimpleFOC\\Objects\\Project.axf" 
-Error: Flash Download failed  -  Target DLL has been cancelled
-Flash Load finished at 20:20:14

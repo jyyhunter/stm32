@@ -23,14 +23,23 @@ void PID_Reset(PIDController *pid)
 
 float PID_Operator(PIDController *pid, float error, float Ts)
 {
-    float P, I, D, output;
+    float P, I, D, output, raw_output;
 
     P = pid->P * error;
     I = pid->integral_prev + pid->I * Ts * 0.5f * (error + pid->error_prev);
     I = _CONSTRAIN(I, -pid->limit, pid->limit);
     D = pid->D * (error - pid->error_prev) / Ts;
 
-    output = P + I + D;
+    raw_output = P + I + D;
+
+    /* 输出饱和时停止积分，避免反向超调后的长时间追击 */
+    if ((raw_output > pid->limit && error > 0.0f) ||
+        (raw_output < -pid->limit && error < 0.0f))
+    {
+        I = pid->integral_prev;
+        raw_output = P + I + D;
+    }
+    output = raw_output;
 
     /* 输出变化率限制 */
     if (pid->output_ramp > 0.0f)
